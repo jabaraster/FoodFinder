@@ -1,0 +1,107 @@
+@accent-fore-color: rgba(255,255,255,1);
+@accent-back-color: rgba(200,150,50,1);
+@footer-color: rgba(150,150,150,1);
+
+.text-shadow(@shadow-color) {
+    text-shadow: 0 0 2px @shadow-color, 0 0 2px @shadow-color, 0 0 2px @shadow-color, 0 0 2px @shadow-color;
+}
+
+#header {
+    width: 100%;
+    text-align: center;
+    color: @accent-fore-color;
+    background: @accent-back-color;
+    .text-shadow(@accent-back-color);
+}
+
+img.logo {
+    display: block;
+    max-width: 100%;
+    max-height: 64px;
+    margin: 0 auto;
+}
+
+#top-box {
+    min-height:400px;
+
+    /*
+    背景いっぱいに画像を設定
+    http://coliss.com/articles/build-websites/operation/css/css-responsive-full-background-image-by-sixrevisions.html
+    */
+    background-image: url("/img/top.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #464646;
+}
+
+#catch-copy {
+    color: rgba(255,255,200,1);
+    .text-shadow(rgba(155,50,0,1));
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 10px;
+    padding-left: 20px;
+}
+
+#login-box {
+    padding: 10px;
+    margin: 0 auto;
+    width: 90%;
+    text-align :center;
+
+    border-radius: 4px;
+    background: @accent-back-color;
+
+    input {
+        text-align: center;
+    }
+}
+
+#contents {
+    padding-bottom: 50px;
+}
+
+#guest-menu {
+    text-align: center;
+}
+
+.menu-item {
+    display: inline-block;
+    height: 100px;
+    line-height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    margin: 3px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,.5);
+}
+
+.word-search {
+    background: rgba(200,255,200,1);
+}
+
+.genre {
+    background: rgba(255,200,200,1);
+}
+
+.neighbor {
+    background: rgba(200,200,255,1);
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(255,255,255,1);
+    box-shadow: 0px -1px 0 fadeout(@footer-color, 10%);
+    border-top: solid 1px fadeout(@footer-color, 50%);
+    color: @footer-color;
+    font-size: small;
+    text-align: center;
+    > a {
+        color: inherit;
+    }
+}
