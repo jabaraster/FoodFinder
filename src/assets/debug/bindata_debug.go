@@ -203,6 +203,24 @@ func assets_img_top_jpg() (*asset, error) {
 	return a, err
 }
 
+// assets_img_top_jpg2 reads file data from disk. It returns an error on failure.
+func assets_img_top_jpg2() (*asset, error) {
+	path := "/Users/jabaraster/Documents/Develop/Go/FoodFinder/assets/img/top_.jpg"
+	name := "assets/img/top_.jpg"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assets_js_common_jsxtransformer_js reads file data from disk. It returns an error on failure.
 func assets_js_common_jsxtransformer_js() (*asset, error) {
 	path := "/Users/jabaraster/Documents/Develop/Go/FoodFinder/assets/js/common/JSXTransformer.js"
@@ -427,6 +445,7 @@ var _bindata = map[string]func() (*asset, error){
 	"assets/html/index.html": assets_html_index_html,
 	"assets/img/ff.png": assets_img_ff_png,
 	"assets/img/top.jpg": assets_img_top_jpg,
+	"assets/img/top_.jpg": assets_img_top_jpg2,
 	"assets/js/common/JSXTransformer.js": assets_js_common_jsxtransformer_js,
 	"assets/js/common/bootstrap.min.js": assets_js_common_bootstrap_min_js,
 	"assets/js/common/jquery.min.js": assets_js_common_jquery_min_js,
@@ -507,6 +526,8 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 			"ff.png": &_bintree_t{assets_img_ff_png, map[string]*_bintree_t{
 			}},
 			"top.jpg": &_bintree_t{assets_img_top_jpg, map[string]*_bintree_t{
+			}},
+			"top_.jpg": &_bintree_t{assets_img_top_jpg2, map[string]*_bintree_t{
 			}},
 		}},
 		"js": &_bintree_t{nil, map[string]*_bintree_t{

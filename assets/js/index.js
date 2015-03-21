@@ -1,4 +1,7 @@
 var LoginBox = React.createClass({displayName: "LoginBox",
+    getInitialState: function() {
+        return { autoLogin: true };
+    },
     componentDidMount: function() {
         $('#login-box .family').focus();
     },
@@ -9,6 +12,9 @@ var LoginBox = React.createClass({displayName: "LoginBox",
     handleSignIn: function() {
         alert('サインイン処理：未実装...');
         return false;
+    },
+    handleAutoLoginChange: function() {
+        this.setState({ autoLogin: !this.state.autoLogin });
     },
     render: function() {
         return (
@@ -22,7 +28,7 @@ var LoginBox = React.createClass({displayName: "LoginBox",
                 ), 
                 React.createElement("div", {className: "checkbox"}, 
                     React.createElement("label", null, 
-                        React.createElement("input", {type: "checkbox", checked: true}), 
+                        React.createElement("input", {type: "checkbox", name: "autoLogin", checked: this.state.autoLogin, onChange: this.handleAutoLoginChange}), 
                         "ログインしたままにする"
                     )
                 ), 
@@ -46,11 +52,20 @@ var GuestMenu = React.createClass({displayName: "GuestMenu",
     render: function() {
         return (
             React.createElement("div", null, 
-                React.createElement("h1", null, "一人で使う"), 
+                React.createElement("h2", {className: "title-single"}, "一人で使う"), 
                 React.createElement("div", {className: "menu-items"}, 
-                    React.createElement("div", {className: "menu-item word-search"}, "ワード検索"), 
-                    React.createElement("div", {className: "menu-item genre"}, "ジャンル別"), 
-                    React.createElement("div", {className: "menu-item neighbor"}, "おとなりさん")
+                    React.createElement("div", {className: "menu-item word-search"}, 
+                        React.createElement("i", {className: "glyphicon glyphicon-user"}), 
+                        "ワード検索"
+                    ), 
+                    React.createElement("div", {className: "menu-item genre"}, 
+                        React.createElement("i", {className: "glyphicon glyphicon-tags"}), 
+                        "ジャンル別"
+                    ), 
+                    React.createElement("div", {className: "menu-item neighbor"}, 
+                        React.createElement("i", {className: "glyphicon glyphicon-home"}), 
+                        "おとなりさん"
+                    )
                 )
             )
         )

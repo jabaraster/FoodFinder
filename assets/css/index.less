@@ -1,4 +1,4 @@
-@accent-fore-color: rgba(255,255,255,1);
+@accent-fore-color: rgba(255,255,200,1);
 @accent-back-color: rgba(200,150,50,1);
 @footer-color: rgba(150,150,150,1);
 
@@ -52,10 +52,15 @@ img.logo {
     text-align :center;
 
     border-radius: 4px;
-    background: @accent-back-color;
+    background: fadeOut(@accent-back-color, 20%);
 
     input {
         text-align: center;
+    }
+
+    div.checkbox {
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 }
 
@@ -65,18 +70,32 @@ img.logo {
 
 #guest-menu {
     text-align: center;
+    .title-single {
+    }
 }
 
 .menu-item {
+    @menu-item-size: 80px;
     display: inline-block;
-    height: 100px;
-    line-height: 100px;
-    width: 100px;
+    height: @menu-item-size;
+    width: @menu-item-size;
+    padding-top: 20px;
     border-radius: 50%;
     text-align: center;
     cursor: pointer;
-    margin: 3px;
-    box-shadow: 2px 2px 3px rgba(0,0,0,.5);
+    margin: 6px;
+/*    box-shadow: 2px 2px 3px rgba(0,0,0,.5); */
+    color: rgba(130,130,130,1);
+    white-space: nowrap;
+    > i {
+        display: block;
+        font-size: 150%;
+        margin-bottom: 5px;
+    }
+}
+
+.menu-item:hover {
+    color: rgba(200,200,0,1) !important;
 }
 
 .word-search {

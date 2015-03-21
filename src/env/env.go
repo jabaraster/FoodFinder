@@ -7,13 +7,13 @@ import (
 )
 
 const (
-    KeyMode = "FD_MODE"
-    KeyDbKind = "FD_DB_KIND"
-    KeyPostgresHost     = "FD_POSTGRES_HOST"
-    KeyPostgresDbName   = "FD_POSTGRES_DB_NAME"
-    KeyPostgresUser     = "FD_POSTGRES_USER"
-    KeyPostgresPassword = "FD_POSTGRES_PASSWORD"
-    KeyPostgresSslMode  = "FD_POSTGRES_SSL_MODE"
+    KeyMode = "FF_MODE"
+    KeyDbKind = "FF_DB_KIND"
+    KeyPostgresHost     = "FF_POSTGRES_HOST"
+    KeyPostgresDbName   = "FF_POSTGRES_DB_NAME"
+    KeyPostgresUser     = "FF_POSTGRES_USER"
+    KeyPostgresPassword = "FF_POSTGRES_PASSWORD"
+    KeyPostgresSslMode  = "FF_POSTGRES_SSL_MODE"
 
     ModeProduction = "production"
     ModeDebug      = "debug"

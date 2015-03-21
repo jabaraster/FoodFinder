@@ -1,4 +1,7 @@
 var LoginBox = React.createClass({
+    getInitialState: function() {
+        return { autoLogin: true };
+    },
     componentDidMount: function() {
         $('#login-box .family').focus();
     },
@@ -9,6 +12,9 @@ var LoginBox = React.createClass({
     handleSignIn: function() {
         alert('サインイン処理：未実装...');
         return false;
+    },
+    handleAutoLoginChange: function() {
+        this.setState({ autoLogin: !this.state.autoLogin });
     },
     render: function() {
         return (
@@ -22,7 +28,7 @@ var LoginBox = React.createClass({
                 </div>
                 <div className="checkbox">
                     <label>
-                        <input type="checkbox" checked />
+                        <input type="checkbox" name="autoLogin" checked={this.state.autoLogin} onChange={this.handleAutoLoginChange} />
                         ログインしたままにする
                     </label>
                 </div>
@@ -46,11 +52,20 @@ var GuestMenu = React.createClass({
     render: function() {
         return (
             <div>
-                <h1>一人で使う</h1>
+                <h2 className="title-single">一人で使う</h2>
                 <div className="menu-items">
-                    <div className="menu-item word-search">ワード検索</div>
-                    <div className="menu-item genre">ジャンル別</div>
-                    <div className="menu-item neighbor">おとなりさん</div>
+                    <div className="menu-item word-search">
+                        <i className="glyphicon glyphicon-user"></i>
+                        ワード検索
+                    </div>
+                    <div className="menu-item genre">
+                        <i className="glyphicon glyphicon-tags"></i>
+                        ジャンル別
+                    </div>
+                    <div className="menu-item neighbor">
+                        <i className="glyphicon glyphicon-home"></i>
+                        おとなりさん
+                    </div>
                 </div>
             </div>
         )
