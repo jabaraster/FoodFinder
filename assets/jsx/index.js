@@ -55,7 +55,7 @@ var GuestMenu = React.createClass({
                 <h2 className="title-single">一人で使う</h2>
                 <div className="menu-items">
                     <div className="menu-item word-search">
-                        <i className="glyphicon glyphicon-user"></i>
+                        <i className="glyphicon glyphicon-search"></i>
                         ワード検索
                     </div>
                     <div className="menu-item genre">

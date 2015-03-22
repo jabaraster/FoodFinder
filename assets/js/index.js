@@ -55,7 +55,7 @@ var GuestMenu = React.createClass({displayName: "GuestMenu",
                 React.createElement("h2", {className: "title-single"}, "一人で使う"), 
                 React.createElement("div", {className: "menu-items"}, 
                     React.createElement("div", {className: "menu-item word-search"}, 
-                        React.createElement("i", {className: "glyphicon glyphicon-user"}), 
+                        React.createElement("i", {className: "glyphicon glyphicon-search"}), 
                         "ワード検索"
                     ), 
                     React.createElement("div", {className: "menu-item genre"}, 
