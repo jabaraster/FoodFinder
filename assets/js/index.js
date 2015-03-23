@@ -44,9 +44,18 @@ var LoginBox = React.createClass({displayName: "LoginBox",
 });
 
 var GuestMenu = React.createClass({displayName: "GuestMenu",
+    switchSelectedItemStyle: function(pSelectedItem) {
+        $(pSelectedItem).parent().find('div.menu-item').removeClass('selected');
+        $(pSelectedItem).addClass('selected');
+    },
     componentDidMount: function() {
+        var self = this;
         $('#guest-menu .menu-item').click(function() {
-            alert($(this).text() + "：未実装...");
+            self.switchSelectedItemStyle(this);
+            $('#top-box').animate({ height: 0, opacity: 0 }, 400, null, function() {
+                // 選択した項目に応じた検索画面の表示
+                $('#guest-menu .contents').fadeIn('fast');
+            });
         });
     },
     render: function() {
@@ -54,19 +63,26 @@ var GuestMenu = React.createClass({displayName: "GuestMenu",
             React.createElement("div", null, 
                 React.createElement("h2", {className: "title-single"}, "一人で使う"), 
                 React.createElement("div", {className: "menu-items"}, 
-                    React.createElement("div", {className: "menu-item word-search"}, 
-                        React.createElement("i", {className: "glyphicon glyphicon-search"}), 
-                        "ワード検索"
-                    ), 
-                    React.createElement("div", {className: "menu-item genre"}, 
-                        React.createElement("i", {className: "glyphicon glyphicon-tags"}), 
-                        "ジャンル別"
-                    ), 
-                    React.createElement("div", {className: "menu-item neighbor"}, 
-                        React.createElement("i", {className: "glyphicon glyphicon-home"}), 
-                        "おとなりさん"
-                    )
+                    React.createElement(MenuItem, {itemName: "word-search", iconName: "search", itemText: "ワード検索"}), 
+                    React.createElement(MenuItem, {itemName: "genre", iconName: "tags", itemText: "ジャンル別"}), 
+                    React.createElement(MenuItem, {itemName: "neighbor", iconName: "home", itemText: "おとなり"})
+                ), 
+                React.createElement("div", {className: "contents"}, 
+                    React.createElement("div", {className: "word-search"})
                 )
+            )
+        )
+    }
+});
+
+var MenuItem = React.createClass({displayName: "MenuItem",
+    render: function() {
+        var classes = React.addons.classSet('menu-item', this.props.itemName);
+        var icon = React.addons.classSet('glyphicon', 'glyphicon-' + this.props.iconName);
+        return (
+            React.createElement("div", {className: classes}, 
+                React.createElement("i", {className: icon}), 
+                this.props.itemText
             )
         )
     }

@@ -44,9 +44,18 @@ var LoginBox = React.createClass({
 });
 
 var GuestMenu = React.createClass({
+    switchSelectedItemStyle: function(pSelectedItem) {
+        $(pSelectedItem).parent().find('div.menu-item').removeClass('selected');
+        $(pSelectedItem).addClass('selected');
+    },
     componentDidMount: function() {
+        var self = this;
         $('#guest-menu .menu-item').click(function() {
-            alert($(this).text() + "：未実装...");
+            self.switchSelectedItemStyle(this);
+            $('#top-box').animate({ height: 0, opacity: 0 }, 400, null, function() {
+                // 選択した項目に応じた検索画面の表示
+                $('#guest-menu .contents').fadeIn('fast');
+            });
         });
     },
     render: function() {
@@ -54,19 +63,26 @@ var GuestMenu = React.createClass({
             <div>
                 <h2 className="title-single">一人で使う</h2>
                 <div className="menu-items">
-                    <div className="menu-item word-search">
-                        <i className="glyphicon glyphicon-search"></i>
-                        ワード検索
-                    </div>
-                    <div className="menu-item genre">
-                        <i className="glyphicon glyphicon-tags"></i>
-                        ジャンル別
-                    </div>
-                    <div className="menu-item neighbor">
-                        <i className="glyphicon glyphicon-home"></i>
-                        おとなりさん
-                    </div>
+                    <MenuItem itemName="word-search" iconName="search" itemText="ワード検索" />
+                    <MenuItem itemName="genre" iconName="tags" itemText="ジャンル別" />
+                    <MenuItem itemName="neighbor" iconName="home" itemText="おとなり" />
                 </div>
+                <div className="contents">
+                    <div className="word-search" />
+                </div>
+            </div>
+        )
+    }
+});
+
+var MenuItem = React.createClass({
+    render: function() {
+        var classes = React.addons.classSet('menu-item', this.props.itemName);
+        var icon = React.addons.classSet('glyphicon', 'glyphicon-' + this.props.iconName);
+        return (
+            <div className={classes}>
+                <i className={icon}></i>
+                {this.props.itemText}
             </div>
         )
     }

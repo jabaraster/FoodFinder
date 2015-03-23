@@ -15,7 +15,7 @@ body {
     width: 100%;
     text-align: center;
     color: @accent-fore-color;
-    background: @accent-back-color;
+    background: fadeOut(@accent-back-color, 10%);
     .text-shadow(@accent-back-color);
 }
 
@@ -27,7 +27,7 @@ img.logo {
 }
 
 #top-box {
-    min-height:400px;
+    height:400px;
 
     /*
     背景いっぱいに画像を設定
@@ -73,8 +73,38 @@ img.logo {
     padding-bottom: 50px;
 }
 
+@menu-selected-color: rgba(200,200,0,1);
+@word-search-color: rgba(200,255,200,1);
+@genre-color: rgba(255,200,200,1);
+@neighbor-color: rgba(200,200,255,1);
+
 #guest-menu {
     text-align: center;
+    div.selected {
+        color: @menu-selected-color;
+    }
+
+    .word-search {
+        background: @word-search-color;
+    }
+
+    .genre {
+        background: @genre-color;
+    }
+
+    .neighbor {
+        background: @neighbor-color;
+    }
+
+    .contents {
+        margin-top: -50px;
+        min-height: 300px;
+        display: none;
+        .word-search {
+            color: @word-search-color;
+            height: 300px;
+        }
+    }
 }
 
 .menu-item {
@@ -98,20 +128,9 @@ img.logo {
 }
 
 .menu-item:hover {
-    color: rgba(200,200,0,1) !important;
+    color: @menu-selected-color !important;
 }
 
-.word-search {
-    background: rgba(200,255,200,1);
-}
-
-.genre {
-    background: rgba(255,200,200,1);
-}
-
-.neighbor {
-    background: rgba(200,200,255,1);
-}
 
 #footer {
     position: fixed;
