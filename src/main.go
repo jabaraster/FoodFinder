@@ -8,21 +8,13 @@ import (
 
     "./assets"
     "./env"
-    "./webutil"
 )
-
-func handler(w http.ResponseWriter, r *http.Request) {
-    webutil.WriteTemplateResponse(w, r, "html/index.html", nil)
-}
-func handleInclude(w http.ResponseWriter, r *http.Request) {
-    webutil.WriteBasicLayoutHtml(w, r, "html/main.html", nil)
-}
 
 func main() {
     env.Dump()
 
     goji.Get("", http.RedirectHandler("/", http.StatusSeeOther))
-    goji.Get("/", handler)
+    goji.Get("/", assets.BasicLayoutHtmlHandler("html/index.html"))
 
     goji.Get("/include", assets.BasicLayoutHtmlHandler("html/main.html"))
 

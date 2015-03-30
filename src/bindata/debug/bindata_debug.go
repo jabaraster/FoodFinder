@@ -221,24 +221,6 @@ func assets_html_main_html() (*asset, error) {
 	return a, err
 }
 
-// assets_html_test_page_html reads file data from disk. It returns an error on failure.
-func assets_html_test_page_html() (*asset, error) {
-	path := "/Users/jabaraster/Documents/Develop/Go/FoodFinder/assets/html/test-page.html"
-	name := "assets/html/test-page.html"
-	bytes, err := bindata_read(path, name)
-	if err != nil {
-		return nil, err
-	}
-
-	fi, err := os.Stat(path)
-	if err != nil {
-		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
-	}
-
-	a := &asset{bytes: bytes, info: fi}
-	return a, err
-}
-
 // assets_img_ff_png reads file data from disk. It returns an error on failure.
 func assets_img_ff_png() (*asset, error) {
 	path := "/Users/jabaraster/Documents/Develop/Go/FoodFinder/assets/img/ff.png"
@@ -536,7 +518,6 @@ var _bindata = map[string]func() (*asset, error){
 	"assets/html/basic-layout.html": assets_html_basic_layout_html,
 	"assets/html/index.html": assets_html_index_html,
 	"assets/html/main.html": assets_html_main_html,
-	"assets/html/test-page.html": assets_html_test_page_html,
 	"assets/img/ff.png": assets_img_ff_png,
 	"assets/img/top.jpg": assets_img_top_jpg,
 	"assets/img/top_.jpg": assets_img_top_jpg2,
@@ -621,8 +602,6 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 			"index.html": &_bintree_t{assets_html_index_html, map[string]*_bintree_t{
 			}},
 			"main.html": &_bintree_t{assets_html_main_html, map[string]*_bintree_t{
-			}},
-			"test-page.html": &_bintree_t{assets_html_test_page_html, map[string]*_bintree_t{
 			}},
 		}},
 		"img": &_bintree_t{nil, map[string]*_bintree_t{
