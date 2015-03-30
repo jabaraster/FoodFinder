@@ -84,7 +84,7 @@ var GuestMenu = React.createClass({
         if (this.state.activate) {
             handler();
         } else {
-            $('#top-box, .title-single').animate({ height: 0, opacity: 0 }, 400, null, handler);
+            $('#top-box').animate({ height: 0, opacity: 0 }, 400, null, handler);
         }
     },
     render: function() {
@@ -92,13 +92,9 @@ var GuestMenu = React.createClass({
             'contents': true,
             'hidden': !this.state.activate
         });
-        var titleSingleClasses = React.addons.classSet({
-            'title-single': true,
-            'hidden': this.state.activate
-        });
         return (
             <div id="guest-menu">
-                <h2 className={titleSingleClasses}>一人で使う</h2>
+                <h2 className="title-single">一人で使う</h2>
                 <div className="menu-items">
                     <MenuItem itemName="word-search" iconName="search" itemText="ワード検索" onClick={this.handleItemClick} />
                     <MenuItem itemName="genre" iconName="tags" itemText="ジャンル別" onClick={this.handleItemClick} />

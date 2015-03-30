@@ -41,6 +41,24 @@ func assets_css_common_bootstrap_min_css() (*asset, error) {
 	return a, err
 }
 
+// assets_css_ff_css reads file data from disk. It returns an error on failure.
+func assets_css_ff_css() (*asset, error) {
+	path := "/Users/jabaraster/Documents/Develop/Go/FoodFinder/assets/css/ff.css"
+	name := "assets/css/ff.css"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assets_css_fonts_glyphicons_halflings_regular_eot reads file data from disk. It returns an error on failure.
 func assets_css_fonts_glyphicons_halflings_regular_eot() (*asset, error) {
 	path := "/Users/jabaraster/Documents/Develop/Go/FoodFinder/assets/css/fonts/glyphicons-halflings-regular.eot"
@@ -149,10 +167,64 @@ func assets_css_index_css() (*asset, error) {
 	return a, err
 }
 
+// assets_html_basic_layout_html reads file data from disk. It returns an error on failure.
+func assets_html_basic_layout_html() (*asset, error) {
+	path := "/Users/jabaraster/Documents/Develop/Go/FoodFinder/assets/html/basic-layout.html"
+	name := "assets/html/basic-layout.html"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // assets_html_index_html reads file data from disk. It returns an error on failure.
 func assets_html_index_html() (*asset, error) {
 	path := "/Users/jabaraster/Documents/Develop/Go/FoodFinder/assets/html/index.html"
 	name := "assets/html/index.html"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assets_html_main_html reads file data from disk. It returns an error on failure.
+func assets_html_main_html() (*asset, error) {
+	path := "/Users/jabaraster/Documents/Develop/Go/FoodFinder/assets/html/main.html"
+	name := "assets/html/main.html"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
+// assets_html_test_page_html reads file data from disk. It returns an error on failure.
+func assets_html_test_page_html() (*asset, error) {
+	path := "/Users/jabaraster/Documents/Develop/Go/FoodFinder/assets/html/test-page.html"
+	name := "assets/html/test-page.html"
 	bytes, err := bindata_read(path, name)
 	if err != nil {
 		return nil, err
@@ -383,6 +455,24 @@ func assets_js_index_min_js() (*asset, error) {
 	return a, err
 }
 
+// assets_js_test_page_js reads file data from disk. It returns an error on failure.
+func assets_js_test_page_js() (*asset, error) {
+	path := "/Users/jabaraster/Documents/Develop/Go/FoodFinder/assets/js/test-page.js"
+	name := "assets/js/test-page.js"
+	bytes, err := bindata_read(path, name)
+	if err != nil {
+		return nil, err
+	}
+
+	fi, err := os.Stat(path)
+	if err != nil {
+		err = fmt.Errorf("Error reading asset info %s at %s: %v", name, path, err)
+	}
+
+	a := &asset{bytes: bytes, info: fi}
+	return a, err
+}
+
 // Asset loads and returns the asset for the given name.
 // It returns an error if the asset could not be found or
 // could not be loaded.
@@ -436,13 +526,17 @@ func AssetNames() []string {
 // _bindata is a table, holding each asset generator, mapped to its name.
 var _bindata = map[string]func() (*asset, error){
 	"assets/css/common/bootstrap.min.css": assets_css_common_bootstrap_min_css,
+	"assets/css/ff.css": assets_css_ff_css,
 	"assets/css/fonts/glyphicons-halflings-regular.eot": assets_css_fonts_glyphicons_halflings_regular_eot,
 	"assets/css/fonts/glyphicons-halflings-regular.svg": assets_css_fonts_glyphicons_halflings_regular_svg,
 	"assets/css/fonts/glyphicons-halflings-regular.ttf": assets_css_fonts_glyphicons_halflings_regular_ttf,
 	"assets/css/fonts/glyphicons-halflings-regular.woff": assets_css_fonts_glyphicons_halflings_regular_woff,
 	"assets/css/fonts/glyphicons-halflings-regular.woff2": assets_css_fonts_glyphicons_halflings_regular_woff2,
 	"assets/css/index.css": assets_css_index_css,
+	"assets/html/basic-layout.html": assets_html_basic_layout_html,
 	"assets/html/index.html": assets_html_index_html,
+	"assets/html/main.html": assets_html_main_html,
+	"assets/html/test-page.html": assets_html_test_page_html,
 	"assets/img/ff.png": assets_img_ff_png,
 	"assets/img/top.jpg": assets_img_top_jpg,
 	"assets/img/top_.jpg": assets_img_top_jpg2,
@@ -455,6 +549,7 @@ var _bindata = map[string]func() (*asset, error){
 	"assets/js/common/react.min.js": assets_js_common_react_min_js,
 	"assets/js/index.js": assets_js_index_js,
 	"assets/js/index.min.js": assets_js_index_min_js,
+	"assets/js/test-page.js": assets_js_test_page_js,
 }
 
 // AssetDir returns the file names below a certain
@@ -503,6 +598,8 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 				"bootstrap.min.css": &_bintree_t{assets_css_common_bootstrap_min_css, map[string]*_bintree_t{
 				}},
 			}},
+			"ff.css": &_bintree_t{assets_css_ff_css, map[string]*_bintree_t{
+			}},
 			"fonts": &_bintree_t{nil, map[string]*_bintree_t{
 				"glyphicons-halflings-regular.eot": &_bintree_t{assets_css_fonts_glyphicons_halflings_regular_eot, map[string]*_bintree_t{
 				}},
@@ -519,7 +616,13 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 			}},
 		}},
 		"html": &_bintree_t{nil, map[string]*_bintree_t{
+			"basic-layout.html": &_bintree_t{assets_html_basic_layout_html, map[string]*_bintree_t{
+			}},
 			"index.html": &_bintree_t{assets_html_index_html, map[string]*_bintree_t{
+			}},
+			"main.html": &_bintree_t{assets_html_main_html, map[string]*_bintree_t{
+			}},
+			"test-page.html": &_bintree_t{assets_html_test_page_html, map[string]*_bintree_t{
 			}},
 		}},
 		"img": &_bintree_t{nil, map[string]*_bintree_t{
@@ -550,6 +653,8 @@ var _bintree = &_bintree_t{nil, map[string]*_bintree_t{
 			"index.js": &_bintree_t{assets_js_index_js, map[string]*_bintree_t{
 			}},
 			"index.min.js": &_bintree_t{assets_js_index_min_js, map[string]*_bintree_t{
+			}},
+			"test-page.js": &_bintree_t{assets_js_test_page_js, map[string]*_bintree_t{
 			}},
 		}},
 	}},

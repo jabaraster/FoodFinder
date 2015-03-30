@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{define "base"}}<!DOCTYPE html>
 <html>
 <head lang="ja">
     <meta charset="utf-8"/>
@@ -10,22 +10,17 @@
     <script src="/js/common/bootstrap.min.js"></script>
     <script src="/js/common/react.js"></script>
     <script src="/js/common/react-with-addons.js"></script>
-    <title>ようこそ ふ〜どふぁいんだ〜 へ</title>
+    <title>{{template "title" .}}</title>
 </head>
 <body>
-    <div id="test"></div>
-
     <header id="header">
         <img src="/img/ff.png" class="logo" />
     </header>
 
-    <div id="page">
-    </div>
+    {{template "contents" .}}
 
     <footer id="footer">
         <div id="copyright">Copyright &copy; K.ISHII All Rights Reserved.</div>
     </footer>
-
-    <script src="/js/index.min.js"></script>
 </body>
-</html>
+</html>{{end}}

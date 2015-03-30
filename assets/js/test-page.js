@@ -84,7 +84,7 @@ var GuestMenu = React.createClass({displayName: "GuestMenu",
         if (this.state.activate) {
             handler();
         } else {
-            $('#top-box, .title-single').animate({ height: 0, opacity: 0 }, 400, null, handler);
+            $('#top-box').animate({ height: 0, opacity: 0 }, 400, null, handler);
         }
     },
     render: function() {
@@ -92,13 +92,9 @@ var GuestMenu = React.createClass({displayName: "GuestMenu",
             'contents': true,
             'hidden': !this.state.activate
         });
-        var titleSingleClasses = React.addons.classSet({
-            'title-single': true,
-            'hidden': this.state.activate
-        });
         return (
             React.createElement("div", {id: "guest-menu"}, 
-                React.createElement("h2", {className: titleSingleClasses}, "一人で使う"), 
+                React.createElement("h2", {className: "title-single"}, "一人で使う"), 
                 React.createElement("div", {className: "menu-items"}, 
                     React.createElement(MenuItem, {itemName: "word-search", iconName: "search", itemText: "ワード検索", onClick: this.handleItemClick}), 
                     React.createElement(MenuItem, {itemName: "genre", iconName: "tags", itemText: "ジャンル別", onClick: this.handleItemClick}), 

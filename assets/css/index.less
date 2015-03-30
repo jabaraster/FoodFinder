@@ -1,29 +1,8 @@
-@accent-fore-color: rgba(255,255,200,1);
-@accent-back-color: rgba(200,150,50,1);
-@footer-color: rgba(150,150,150,1);
+@import "./ff-thema.less";
 
 .text-shadow(@shadow-color) {
     /* 参考・http://kumacrow.blog111.fc2.com/blog-entry-278.html */
     text-shadow: 0 0 2px @shadow-color, 0 0 2px @shadow-color, 0 0 2px @shadow-color, 0 0 2px @shadow-color;
-}
-
-body {
-    font-family:"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","ＭＳ Ｐゴシック","MS PGothic",Osaka,sans-self,Verdana,Arial,Helvetica;
-}
-
-#header {
-    width: 100%;
-    text-align: center;
-    color: @accent-fore-color;
-    background: fadeOut(@accent-back-color, 10%);
-    .text-shadow(@accent-back-color);
-}
-
-img.logo {
-    display: block;
-    max-width: 100%;
-    max-height: 64px;
-    margin: 0 auto;
 }
 
 #top-box {
@@ -80,6 +59,7 @@ img.logo {
 
 #guest-menu {
     text-align: center;
+    padding-bottom: 50px;
     div.selected {
         color: @menu-selected-color;
     }
@@ -129,18 +109,3 @@ img.logo {
     color: @menu-selected-color !important;
 }
 
-
-#footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: rgba(255,255,255,1);
-    box-shadow: 0px -1px 0 fadeout(@footer-color, 10%);
-    border-top: solid 1px fadeout(@footer-color, 50%);
-    color: @footer-color;
-    font-size: small;
-    text-align: center;
-    > a {
-        color: inherit;
-    }
-}
