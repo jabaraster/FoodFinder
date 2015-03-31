@@ -1,16 +1,18 @@
 {{define "base"}}<!DOCTYPE html>
-<html>
-<head lang="ja">
+<html lang="ja">
+<head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="/css/common/bootstrap.min.css" type="text/css">
+
     {{"/css/common/bootstrap.min.css"|css}}
-    <link rel="stylesheet" href="/css/ff.css" type="text/css">
-    <link rel="stylesheet" href="{{template "page.css" .}}" type="text/css">
-    <script src="/js/common/jquery.min.js"></script>
-    <script src="/js/common/bootstrap.min.js"></script>
-    <script src="/js/common/react.js"></script>
-    <script src="/js/common/react-with-addons.js"></script>
+    {{"/css/common/ff.css"|css}}
+    {{template "page.css" .}}
+
+    {{"/js/common/jquery.min.js"|js}}
+    {{"/js/common/bootstrap.min.js"|js}}
+    {{"/js/common/react.js"|js}}
+    {{"/js/common/react-with-addons.js"|js}}
+
     <title>{{template "title" .}} ふ〜どふぁいんだ〜</title>
 </head>
 <body>
@@ -24,6 +26,6 @@
         <div id="copyright">Copyright &copy; K.ISHII All Rights Reserved.</div>
     </footer>
 
-    <script src="{{template "page.js" .}}"></script>
+    {{template "page.js" .}}
 </body>
 </html>{{end}}

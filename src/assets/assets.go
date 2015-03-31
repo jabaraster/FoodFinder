@@ -25,22 +25,16 @@ type basicLayoutHtmlHandler struct {
 }
 
 func (h *basicLayoutHtmlHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-    baseData, err := getData("html/basic-layout.html")
-    if err != nil {
-        panic(err)
-    }
-    contentsData, err2 := getData(h.htmlPath)
-    if err2 != nil {
-        panic(err2)
-    }
+    baseData := mustGetData("html/common/basic-layout.html")
+    contentsData := mustGetData(h.htmlPath)
 
     funcMap := template.FuncMap{
         "css": cssTagOutputer,
+        "js": scriptTagOutputer,
     }
 
     tmpl := template.Must(template.New("base").Funcs(funcMap).Parse(string(baseData)))
-    tmpl = template.Must(tmpl.New("contents").Parse(string(contentsData)))
-    tmpl.Funcs(funcMap)
+    tmpl = template.Must(tmpl.New("contents").Funcs(funcMap).Parse(string(contentsData)))
 
     err3 := tmpl.ExecuteTemplate(w, "base", nil)
     if err3 != nil {
@@ -50,10 +44,22 @@ func (h *basicLayoutHtmlHandler) ServeHTTP(w http.ResponseWriter, r *http.Reques
 
 func cssTagOutputer(text string) template.HTML {
     cssInfo := mustGetInfo(text[1:])
-    base := time.Date(1900, time.January, 1, 0, 0, 0, 0, time.UTC)
-    descriptor := cssInfo.ModTime().Sub(base).Nanoseconds()
-    tag := fmt.Sprintf("<link rel=\"stylesheet\" href=\"%s%s%d\" type=\"text/css\">", text, assetsFileDelimiter, descriptor)
+    descriptor := newDescriptor(cssInfo)
+    tag := fmt.Sprintf("<link rel=\"stylesheet\" href=\"%s%s%s\" type=\"text/css\">", text, assetsFileDelimiter, descriptor)
     return template.HTML(tag)
+}
+
+func scriptTagOutputer(text string) template.HTML {
+    jsInfo := mustGetInfo(text[1:])
+    descriptor := newDescriptor(jsInfo)
+    tag := fmt.Sprintf("<script src=\"%s%s%s\" type=\"text/javascript\"></script>", text, assetsFileDelimiter, descriptor)
+    return template.HTML(tag)
+}
+
+func newDescriptor(fileInfo os.FileInfo) string {
+    base := time.Date(1900, time.January, 1, 0, 0, 0, 0, time.UTC)
+    descriptor := fileInfo.ModTime().Sub(base).Nanoseconds()
+    return strconv.FormatInt(descriptor, 10)
 }
 
 func ParseAsset(path string) (*template.Template, error) {
@@ -78,13 +84,9 @@ func extractFilePath(r *http.Request) *assetFile {
 
     switch (len(tokens)) {
         case 1:
-            return &assetFile{tokens[0], false, 0}
+            return &assetFile{tokens[0], false, "0"}
         case 2:
-            i, err := strconv.ParseInt(tokens[1], 10, 64)
-            if err != nil {
-                panic(err)
-            }
-            return &assetFile{tokens[0], true, i}
+            return &assetFile{tokens[0], true, tokens[1]}
     }
     panic(originalPath)
 }
@@ -92,7 +94,7 @@ func extractFilePath(r *http.Request) *assetFile {
 type assetFile struct {
     filePath string
     cacheable bool
-    delimiter int64
+    delimiter string
 }
 
 func (h *contentTypeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -109,8 +111,8 @@ func (h *contentTypeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
     }
     w.Header().Add("content-type", h.contentType)
     if asset.cacheable {
-        cacheSeconds := 60 * 60 * 24 * 365 // 1年間キャッシュを有効にする
-        w.Header().Add("cache-control", "max-age=" + strconv.Itoa(cacheSeconds))
+        s := time.Hour * 24 * 365
+        w.Header().Add("cache-control", fmt.Sprintf("max-age=%d", s)) //1年間キャッシュを有効にする
     }
 
     _, err2 := w.Write(data)

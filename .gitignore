@@ -25,6 +25,6 @@ _testmain.go
 
 .idea/*
 assets/js/.module-cache
-assets/debug/bindata_debug.go
+bindata_debug.go
 ff
-wiki.db
+*.db
