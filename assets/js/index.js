@@ -1,3 +1,4 @@
+var TransitionGroup = React.addons.CSSTransitionGroup;
 
 var TopBox = React.createClass({displayName: "TopBox",
     render: function() {

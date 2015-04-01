@@ -16,7 +16,7 @@ func main() {
     goji.Get("", http.RedirectHandler("/", http.StatusSeeOther))
     goji.Get("/", assets.BasicLayoutHtmlHandler("html/index.html"))
 
-    goji.Get("/include", assets.BasicLayoutHtmlHandler("html/main.html"))
+    goji.Get("/sandbox", assets.BasicLayoutHtmlHandler("html/sandbox.html"))
 
     goji.Get("/css/*", assets.ContentTypeHandler("text/css"))
     goji.Get("/js/*", assets.ContentTypeHandler("text/javascript"))

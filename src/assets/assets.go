@@ -29,16 +29,16 @@ func (h *basicLayoutHtmlHandler) ServeHTTP(w http.ResponseWriter, r *http.Reques
     contentsData := mustGetData(h.htmlPath)
 
     funcMap := template.FuncMap{
-        "css": cssTagOutputer,
-        "js": scriptTagOutputer,
+        "cssTag": cssTagOutputer,
+        "jsTag": scriptTagOutputer,
     }
 
     tmpl := template.Must(template.New("base").Funcs(funcMap).Parse(string(baseData)))
     tmpl = template.Must(tmpl.New("contents").Funcs(funcMap).Parse(string(contentsData)))
 
-    err3 := tmpl.ExecuteTemplate(w, "base", nil)
-    if err3 != nil {
-        panic(err3)
+    err := tmpl.ExecuteTemplate(w, "base", nil)
+    if err != nil {
+        panic(err)
     }
 }
 
@@ -123,17 +123,6 @@ func (h *contentTypeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
             http.NotFound(w, r)
         }
         return
-    }
-}
-
-func AssetsHandler(w http.ResponseWriter, r *http.Request) {
-    data, err := getData(r.URL.Path[1:])
-    if err != nil {
-        panic(err)
-    }
-    _, err2 := w.Write(data)
-    if err2 != nil {
-        panic(err2)
     }
 }
 
